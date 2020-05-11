@@ -1,7 +1,7 @@
 angular.module('app').service('OperadoresService', function($http) {
 	var service = {
 		buscarTodos: function() {
-			return $http.get('rest/operadores', {cache: true})
+			return $http.get('rest/operadores')
 				.then(function(resp) {
 					return resp.data;
 				})

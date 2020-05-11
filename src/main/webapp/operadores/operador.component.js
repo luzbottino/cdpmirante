@@ -1,14 +1,17 @@
-function OperadorController($state, OperadoresService) {
-	this.titulo = 'Operador'
+function OperadorController($state, $scope, OperadoresService) {
+	var vm = this;
+	vm.titulo = 'Operador'
 
-	this.salvar = function () {		
-		OperadoresService.salvar(this.operador);
-		$state.reload();			
-		$state.go('operadores', {}, {reload: 'operadores'});
+	vm.salvar = function () {		
+		OperadoresService.salvar(vm.operador).then(resp => {
+			$scope.$emit('atualizarListaOperadores');
+			$state.go('operadores');
+		});			
 	}
 }
 angular.module('app').component('operador', {
 	templateUrl: 'operadores/operador.html',
 	bindings: { operador: '<' },
-	controller: OperadorController
+	controller: OperadorController,
+	controllerAs: 'ctrl'
 })

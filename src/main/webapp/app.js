@@ -29,10 +29,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/{id}',
 			component: 'operador',
 			resolve: {
+				// TODO: buscar no servidor
 				operador: function(operadores, $stateParams) {
-					return operadores.find(function(operador) {						
+					return angular.copy(operadores.find(function(operador) {						
 						return operador.id == $stateParams.id;
-					});
+					}));
 				}
 			}			
 		},
