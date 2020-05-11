@@ -1,9 +1,10 @@
 function OperadorController($state, $scope, OperadoresService) {
-	var vm = this;
-	vm.titulo = 'Operador'
+	var ctrl = this;
+	
+	ctrl.titulo = 'Operador'
 
-	vm.salvar = function () {		
-		OperadoresService.salvar(vm.operador).then(resp => {
+	ctrl.salvar = function () {		
+		OperadoresService.salvar(ctrl.operador).then(resp => {
 			$scope.$emit('atualizarListaOperadores');
 			$state.go('operadores');
 		});			

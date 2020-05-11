@@ -1,12 +1,12 @@
 function OperadoresController($state, $scope, OperadoresService) {
-	var vm = this;
+	var ctrl = this;
 
-	vm.titulo = 'Lista de Operadores'
+	ctrl.titulo = 'Lista de Operadores'
 
-	vm.excluir = function (operador) {
+	ctrl.excluir = function (operador) {
 		OperadoresService.excluir(operador.id).then(resp => {
 			OperadoresService.buscarTodos().then(resp => {
-				this.operadores = resp;
+				ctrl.operadores = resp;
 			})
 		});
 	}
