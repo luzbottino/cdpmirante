@@ -16,8 +16,8 @@
       <tbody>
         <tr ng-repeat="operador in $ctrl.operadores">          
             <td>
-              <a ui-sref-active="active" ui-sref="operadores.editar({ id: operador.id })">Editar</a> |
-              <a ng-click="$ctrl.excluir(operador)">Excluira>
+              <button class="btn btn-warn" ui-sref-active="active" ui-sref="operadores.editar({ id: operador.id })">Editar</button> |
+              <button class="btn btn-warn" ng-click="$ctrl.excluir(operador)" ng-class="{'link-desabilitado': operador.administrador}" ng-disabled="operador.administrador">Excluir</button>
             </td>
             <td>{{operador.nome}}</td>
             <td>{{operador.login}}</td>

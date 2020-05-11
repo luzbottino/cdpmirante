@@ -38,7 +38,7 @@ body {
 }
 
 .link-desabilitado {
- text-decoration: dashed; 
+ text-decoration: line-through; 
 }
 
 .barra-titulo {
