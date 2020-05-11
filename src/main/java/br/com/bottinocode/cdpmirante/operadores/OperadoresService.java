@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.ws.rs.NotFoundException;
 
 @Stateless
 public class OperadoresService {
@@ -22,7 +23,7 @@ public class OperadoresService {
     public void salvar(Operador operador) {
 		log.info("Salvando " + operador.getNome());
 		
-		if(em.find(Operador.class, operador.getId()) == null) {
+		if(operador.getId() == null || em.find(Operador.class, operador.getId()) == null) {
 			em.persist(operador);
 		} else {
 			em.merge(operador);	
@@ -30,5 +31,16 @@ public class OperadoresService {
 		
 		event.fire(operador);
 
+	}
+
+	public void excluir(Long id) {
+		Operador operador = em.find(Operador.class, id);
+		
+		if(operador == null) {
+			throw new NotFoundException();
+		}
+		
+		log.info("Excluindo " + operador.getNome());
+		em.remove(operador);		
 	}
 }

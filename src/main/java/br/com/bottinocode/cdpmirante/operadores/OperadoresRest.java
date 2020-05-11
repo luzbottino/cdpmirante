@@ -16,7 +16,9 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -56,6 +58,20 @@ public class OperadoresRest {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return operador;
+    }
+    
+    @DELETE
+    @Path("/{id:[0-9][0-9]*}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response exluir(@PathParam("id") Long id) {
+        
+        try {
+        	servico.excluir(id);
+        } catch (NotFoundException e) {
+        	throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+        
+        return Response.noContent().build();
     }
     
     @POST

@@ -11,9 +11,21 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 					return OperadoresService.buscarTodos();
 				}
 			}			
+		},		
+		{
+			name: 'operadores.salvar',
+			url: '/',
+			component: 'operador',
+			resolve: {
+				operador: function(operadores, $stateParams) {
+					return operadores.find(function(operador) {						
+						return operador.id == $stateParams.id;
+					});
+				}
+			}			
 		},
 		{
-			name: 'operadores.operador',
+			name: 'operadores.editar',
 			url: '/{id}',
 			component: 'operador',
 			resolve: {

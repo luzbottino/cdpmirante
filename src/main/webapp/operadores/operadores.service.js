@@ -10,6 +10,11 @@ angular.module('app').service('OperadoresService', function($http) {
 			return $http.post('rest/operadores', operador).then(function(resp) {
 				return resp.data;
 			})
+		},
+		excluir: function(id) {
+			return $http.delete('rest/operadores/' + id).then(function(resp) {
+				return resp.data;
+			})
 		}
 	}
 

@@ -1,8 +1,10 @@
-function OperadorController(OperadoresService) {
-	this.titulo = 'Editar Operador'
+function OperadorController($state, OperadoresService) {
+	this.titulo = 'Operador'
 
 	this.salvar = function () {		
-		return OperadoresService.salvar(this.operador);
+		OperadoresService.salvar(this.operador);
+		$state.reload();			
+		$state.go('operadores', {}, {reload: 'operadores'});
 	}
 }
 angular.module('app').component('operador', {

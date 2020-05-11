@@ -37,6 +37,10 @@ body {
   padding: 10px;
 }
 
+.link-desabilitado {
+ text-decoration: dashed; 
+}
+
 .barra-titulo {
   padding-left: 10px;
   border-bottom: #808080 5px;

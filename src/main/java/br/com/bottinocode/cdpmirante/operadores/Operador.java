@@ -60,6 +60,7 @@ public class Operador {
 	@Column(name = "PERFIL")	
 	private Perfil perfil;
 
+	@Getter
 	@Column(name = "ADMINISTRADOR")
 	private Boolean administrador = false;
 		
