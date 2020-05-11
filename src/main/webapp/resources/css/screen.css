@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F1F1F1;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 0.8em;
+  color: #363636;
+}
+
+.barra-titulo {
+  grid-area: header;
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.principal {
+  grid-area: main;
+}
+
+.detalhe {
+  grid-area: right;
+}
+
+.rodape {
+  grid-area: footer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  grid-gap: 10px;  
+  padding: 10px;
+}
+
+.barra-titulo {
+  padding-left: 15px;
+  border-bottom: #808080 5px;
+}
+
+.divider {
+  border-top: 4px solid #008b8b;
+  width: 80%;
+}
