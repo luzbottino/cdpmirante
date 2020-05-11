@@ -62,13 +62,13 @@ public class OperadoresRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Response criar(Operador operador) {
+    public Response salvar(Operador operador) {
 
         Response.ResponseBuilder builder = null;
 
         try {
             validarOperador(operador);
-            servico.criar(operador);
+            servico.salvar(operador);
 
             builder = Response.ok();
         } catch (ConstraintViolationException ce) { 

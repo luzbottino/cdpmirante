@@ -1,4 +1,4 @@
-package br.com.bottinocode.cdpmirante.operadores;
+	package br.com.bottinocode.cdpmirante.operadores;
 
 import java.time.LocalDate;
 
@@ -28,6 +28,7 @@ public class Operador {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
 	@Column(name = "ID")
     private Long id;
 	
@@ -48,19 +49,20 @@ public class Operador {
 	@NotNull
 	@Size(min = 6, max = 15)
 	@Pattern(regexp = "[^\\s]*", message = "Espaços em branco não são permitidos")
+	@Getter
 	@Setter
 	@Column(name = "SENHA")
 	private String senha;
 	
 	@Enumerated
 	@Getter
+	@Setter
 	@Column(name = "PERFIL")	
 	private Perfil perfil;
 
 	@Column(name = "ADMINISTRADOR")
 	private Boolean administrador = false;
-
-	@Getter	
+		
 	@Column(name = "DATA_CADASTRO", columnDefinition = "DATE")	
 	private LocalDate dataCadastro = LocalDate.now();	
 

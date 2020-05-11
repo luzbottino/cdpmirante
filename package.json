@@ -2,7 +2,7 @@
     "name": "cdpmiranteapp",
     "version": "1.0.0",
     "authors": [
-        "Luis Bottino <luis.f.bottino@gmail.com>"        
+        "Luis Bottino <luis.f.bottino@gmail.com>"
     ],
     "description": "Aplicação de cadastro de pessoas",
     "private": true,

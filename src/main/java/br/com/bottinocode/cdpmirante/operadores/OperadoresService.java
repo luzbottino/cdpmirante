@@ -19,9 +19,15 @@ public class OperadoresService {
     @Inject
     private EntityManager em;
     
-    public void criar(Operador operador) {
-		log.info("Registrando " + operador.getNome());
-		em.persist(operador);
+    public void salvar(Operador operador) {
+		log.info("Salvando " + operador.getNome());
+		
+		if(em.find(Operador.class, operador.getId()) == null) {
+			em.persist(operador);
+		} else {
+			em.merge(operador);	
+		}
+		
 		event.fire(operador);
 
 	}

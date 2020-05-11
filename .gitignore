@@ -5,3 +5,7 @@ target/*
 .factorypath
 .metadata/*
 .project
+node_modules/*
+bower_components/*
+build/*
+temp/*
