@@ -81,5 +81,10 @@ public class Pessoa {
 	@Column(name = "TIPO")	
 	private Tipo tipo;
 	
+	public enum Tipo {
+		FISICA, JURIDICA
+	}
+
+	
 
 }

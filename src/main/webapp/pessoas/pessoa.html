@@ -16,7 +16,7 @@
 				<input ng-if="ctrl.pessoa.tipo == 'FISICA'" type="text" class="form-control" id="documento" mask="999.999.999-99" clean="true" placeholder="Digite um documento de CPF"
 					ng-model="ctrl.pessoa.documento" ng-disabled="ctrl.pessoa.id != null || ctrl.perfil == 'ANALISTA'">
 
-				<input ng-if="ctrl.pessoa.tipo == 'JURIDICA'" type="text" class="form-control" id="documento" mask="99.999.999/9999-99" clean"true" placeholder="Digite um documento de CNPJ"
+				<input ng-if="ctrl.pessoa.tipo == 'JURIDICA'" type="text" class="form-control" id="documento" mask="99.999.999/9999-99" clean="true" placeholder="Digite um documento de CNPJ"
 					ng-model="ctrl.pessoa.documento" ng-disabled="ctrl.pessoa.id != null || ctrl.perfil == 'ANALISTA'">
 			</div>
 		</div>
