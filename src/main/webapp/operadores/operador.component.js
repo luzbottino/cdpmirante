@@ -6,7 +6,7 @@ function OperadorController($state, $scope, OperadoresService) {
 	ctrl.salvar = function () {		
 		OperadoresService.salvar(ctrl.operador).then(resp => {
 			$scope.$emit('atualizarListaOperadores');
-			$state.go('operadores');
+			$state.go('home.operadores');
 		});			
 	}
 }

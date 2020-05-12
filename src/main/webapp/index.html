@@ -24,56 +24,26 @@
     <script src="lib/dependencies/ui-bootstrap-tpls.min.js"></script>
     <script src="lib/dependencies/ng-grid.min.js"></script>
     <script src="lib/dependencies/angular-ui-router.js"></script>
+    <script src="lib/dependencies/stateEvents.min.js"></script>
+    <script src="lib/dependencies/ngStorage.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js script/all.js -->
     <script src="app.js"></script>
     <script src="operadores/operadores.service.js"></script>
+    <script src="autenticacao/autenticacao.service.js"></script>
+    <script src="autenticacao/login.component.js"></script>
+    <script src="home/home.component.js"></script>
     <script src="operadores/operador.component.js"></script>
     <script src="operadores/operadores.component.js"></script>
     <script src="pessoas/pessoas.component.js"></script>
+    <script src="autenticacao/acesso-negado.component.js"></script>
     <!-- endbuild -->
 </head>
 
 <body>
-    <div class="grid-container">
-        <div class="barra-titulo">
-
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-5" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Cadastro de Pessoas</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
-                        <p class="navbar-text navbar-right">Logado com usuario <a href="#" class="navbar-link">Mark Otto</a>
-                        </p>
-                    </div>
-                </div>
-            </nav>            
-        </div>
-        <div class="menu">
-            <ul class="nav nav-pills nav-stacked">
-
-                <li role="presentation"><a ui-sref="pessoas" ui-sref-active="active">Pessoas</a></li>
-                <li role="presentation"><a ui-sref="operadores" ui-sref-active="active">Operadores</a></li>
-
-            </ul>
-        </div>
-        <div class="principal">
-            <ui-view></ui-view>
-        </div>
-        <!-- <div class="detalhe">Right</div> -->
-        <div class="rodape">Footer</div>
-    </div>
-
+    <ui-view></ui-view>
 </body>
 
 </html>

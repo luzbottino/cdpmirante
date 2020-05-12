@@ -1,0 +1,38 @@
+<div class="grid-container">
+    <div class="barra-titulo">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-5" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Cadastro de Pessoas</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+                    <p class="navbar-text navbar-right">
+                        Logado com usuario <strong>{{ctrl.usuario}}</strong>
+                        <button class="btn btn-default btn-sair" ng-click="ctrl.sair()">Sair</button>
+                    </p>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="menu">
+        <ul class="nav nav-pills nav-stacked">
+
+            <li role="presentation"><a ui-sref="home.pessoas" ui-sref-active="active">Pessoas</a></li>
+            <li role="presentation"><a ui-sref="home.operadores" ui-sref-active="active">Operadores</a></li>
+
+        </ul>
+    </div>
+    <div class="principal">
+        <ui-view></ui-view>
+    </div>    
+    <div class="rodape"></div>
+</div>

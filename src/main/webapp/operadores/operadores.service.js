@@ -1,18 +1,18 @@
-angular.module('app').service('OperadoresService', function($http) {
+angular.module('app').service('OperadoresService', function ($http) {
 	var service = {
-		buscarTodos: function() {
+		buscarTodos: function () {
 			return $http.get('rest/operadores')
-				.then(function(resp) {
+				.then(function (resp) {
 					return resp.data;
-				})
-		},
-		salvar: function(operador) {
-			return $http.post('rest/operadores', operador).then(function(resp) {
+				});
+		},		
+		salvar: function (operador) {
+			return $http.post('rest/operadores', operador).then(function (resp) {
 				return resp.data;
 			})
 		},
-		excluir: function(id) {
-			return $http.delete('rest/operadores/' + id).then(function(resp) {
+		excluir: function (id) {
+			return $http.delete('rest/operadores/' + id).then(function (resp) {
 				return resp.data;
 			})
 		}

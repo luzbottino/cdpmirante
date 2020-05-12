@@ -27,6 +27,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.bottinocode.cdpmirante.autenticacao.Login;
+
 @Path("/operadores")
 @RequestScoped
 public class OperadoresRest {
@@ -43,12 +45,14 @@ public class OperadoresRest {
     @Inject
     private OperadoresService servico;
     
+    @Login
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Operador> listar() {
         return repositorio.buscarTodos();
     }
     
+    @Login
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,6 +64,7 @@ public class OperadoresRest {
         return operador;
     }
     
+    @Login
     @DELETE
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,6 +79,7 @@ public class OperadoresRest {
         return Response.noContent().build();
     }
     
+    @Login
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
