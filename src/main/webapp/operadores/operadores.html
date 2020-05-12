@@ -15,9 +15,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="operador in ctrl.operadores">          
-            <td>
-              <!-- FIXME: Após inserção, ao tentar editar, os dados não são carregados -->
-              <button class="btn btn-warn" ui-sref-active="active" ui-sref="home.operadores.editar({ id: operador.id })">Editar</button> |
+            <td>              
+              <button class="btn btn-warn" ui-sref-active="active" ui-sref="home.operadores.editar({ id: operador.id })">Ver</button> |
               <button class="btn btn-warn" ng-click="ctrl.excluir(operador)" ng-class="{'link-desabilitado': operador.administrador}" ng-disabled="operador.administrador">Excluir</button>
             </td>
             <td>{{operador.nome}}</td>
@@ -27,7 +26,7 @@
       </tbody>
     </table>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <ui-view></ui-view>
   </div>
 </div>

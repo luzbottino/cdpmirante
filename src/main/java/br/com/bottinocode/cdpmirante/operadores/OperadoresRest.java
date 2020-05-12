@@ -89,6 +89,7 @@ public class OperadoresRest {
         	Map<String, String> violacoes = validador.validarObjeto(operador);
         	
         	if(violacoes.isEmpty()) {
+        		servico.salvar(operador);
         		builder = Response.ok();
         	} else {
         		builder = Response.status(Response.Status.BAD_REQUEST).entity(violacoes);	

@@ -39,7 +39,7 @@ public class Pessoa {
     private String nome;
 	
 	@NotNull    
-	@Size(min = 12, max = 15, message = "CPF ou CNPJ inválido")    
+	@Size(min = 11, max = 14, message = "CPF ou CNPJ inválido")    
 	@Getter
 	@Column(name = "DOCUMENTO")
     private String documento;
@@ -65,6 +65,7 @@ public class Pessoa {
 	@Column(name = "NOME_PAI")
     private String nomePai;
 	
+	@Getter
 	@Column(name = "DATA_CADASTRO", columnDefinition = "DATE")	
 	private Date dataCadastro = new Date();
 	

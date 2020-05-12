@@ -88,6 +88,7 @@ public class PessoasRest {
         	Map<String, String> violacoes = validador.validarObjeto(pessoa);
         	
         	if(violacoes.isEmpty()) {
+        		servico.salvar(pessoa);
         		builder = Response.ok();
         	} else {
         		builder = Response.status(Response.Status.BAD_REQUEST).entity(violacoes);	

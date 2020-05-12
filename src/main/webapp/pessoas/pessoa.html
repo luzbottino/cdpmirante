@@ -1,0 +1,76 @@
+<div class="row">
+	<h3>{{ctrl.titulo}}</h3>
+</div>
+<div class="row">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nome">Nome:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="nome" placeholder="Digite um nome"
+					ng-model="ctrl.pessoa.nome" ng-disabled="ctrl.perfil == 'ANALISTA'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="documento">Documento:</label>
+			<div class="col-sm-10">
+				<input ng-if="ctrl.pessoa.tipo == 'FISICA'" type="text" class="form-control" id="documento" mask="999.999.999-99" clean="true" placeholder="Digite um documento de CPF"
+					ng-model="ctrl.pessoa.documento" ng-disabled="ctrl.pessoa.id != null || ctrl.perfil == 'ANALISTA'">
+
+				<input ng-if="ctrl.pessoa.tipo == 'JURIDICA'" type="text" class="form-control" id="documento" mask="99.999.999/9999-99" clean"true" placeholder="Digite um documento de CNPJ"
+					ng-model="ctrl.pessoa.documento" ng-disabled="ctrl.pessoa.id != null || ctrl.perfil == 'ANALISTA'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="dataNascimento">Data de nascimento:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="dataNascimento" placeholder="Digite uma data de nascimento"
+					ng-model="ctrl.pessoa.dataNascimento" ng-disabled="ctrl.perfil == 'ANALISTA'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="dataCadastro">Data de cadastro:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="dataCadastro"
+					ng-model="ctrl.pessoa.dataCadastro" disabled>
+			</div>
+		</div>		 
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nomeMae">Nome da mãe:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="nomeMae" placeholder="Digite o nome da mãe"
+					ng-model="ctrl.pessoa.nomeMae" ng-disabled="ctrl.perfil == 'ANALISTA'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="nomePai">Nome do pai:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="nomePai" placeholder="Digite o nome do pai"
+					ng-model="ctrl.pessoa.nomePai" ng-disabled="ctrl.perfil == 'ANALISTA'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="loginOperador">Login do operador:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="loginOperador"
+					ng-model="ctrl.pessoa.login" disabled>
+			</div>
+		</div>		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="tipo">Tipo:</label>
+			<div class="col-sm-10">
+				<select ng-model="ctrl.pessoa.tipo" ng-disabled="ctrl.perfil == 'ANALISTA'">					
+					<option value="FISICA" selected>Fisica 
+					<option value="JURIDICA">Juridica					
+				</select>				
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" ng-click="ctrl.salvar()" class="btn btn-info" ng-if="ctrl.perfil == 'GERENTE'">Salvar</button>
+				<button class="btn btn-default" ui-sref="home.pessoas" ng-if="ctrl.perfil == 'GERENTE'">Cancelar</button>
+				<button class="btn btn-default" ui-sref="home.pessoas" ng-if="ctrl.perfil == 'ANALISTA'">Voltar</button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -6,22 +6,23 @@ function LoginController($state, AutenticacaoService, OperadoresService, autenti
 	ctrl.operador = '';
 
 	ctrl.logar = function () {
-		AutenticacaoService.autenticar(ctrl.operador).success((data, status, headers, config) => {			
+		AutenticacaoService.autenticar(ctrl.operador).success((data, status, headers, config) => {
 			autenticacao.setToken(headers().authorization);
-			
+
 			OperadoresService.buscarTodos().then(resp => {
 				var autenticado = resp.find(o => o.login == ctrl.operador.login);
-				
-				if(autenticado) {
+
+				if (autenticado) {
 					autenticacao.setNome(autenticado.nome);
 					autenticacao.setPerfil(autenticado.perfil);
+					autenticacao.setLogin((autenticado.login));
 					autenticacao.setAdministrador(autenticado.administrador);
 				}
 			});
-			
+
 			$state.go('home');
 		})
-		
+
 	}
 
 

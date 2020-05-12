@@ -1,1 +1,43 @@
-It works!
+<div class="row">
+  <div class="col-md-6">
+    <h3>{{ctrl.titulo}}</h3>
+    <hr>
+    <button class="btn btn-warn" ui-sref="home.pessoas.salvar" ui-sref-active="active"
+      ng-class="{'link-desabilitado': ctrl.perfil != 'GERENTE'}" ng-disabled="ctrl.perfil != 'GERENTE'">Novo</button>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Documento</th>
+          <th>Data de nascimento</th>
+          <th>Data de cadastro</th>
+          <th>Login do operador</th>
+          <th>Tipo pessoa</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="pessoa in ctrl.pessoas">
+          <td>
+            <button class="btn btn-warn" ui-sref-active="active" ui-sref="home.pessoas.editar({ id: pessoa.id })">Ver</button> |
+            <button class="btn btn-warn" ng-click="ctrl.excluir(pessoa)"
+              ng-class="{'link-desabilitado': ctrl.perfil != 'GERENTE'}"
+              ng-disabled="ctrl.perfil != 'GERENTE'">Excluir</button>
+          </td>
+          <td>{{pessoa.nome}}</td>
+          <td>{{pessoa.documento}}</td>
+          <td>{{pessoa.dataNascimento}}</td>
+          <td>{{pessoa.dataCadastro}}</td>
+          <td>{{pessoa.login}}</td>
+          <td>{{pessoa.tipo}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-5">
+    <ui-view></ui-view>
+  </div>
+</div>

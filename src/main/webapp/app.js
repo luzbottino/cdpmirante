@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngResource', 'ngGrid', 'ui.bootstrap', 'ui.router', 'ui.router.state.events', 'ngStorage']);
+var app = angular.module('app', ['ngResource', 'ngGrid', 'ui.bootstrap', 'ui.router', 'ui.router.state.events', 'ngStorage', 'ngMask']);
 
 app.factory('autenticacao', ['$q', '$localStorage', function ($q, $localStorage) {
 
@@ -15,11 +15,17 @@ app.factory('autenticacao', ['$q', '$localStorage', function ($q, $localStorage)
 		getNome: function () {
 			return $localStorage.nome;
 		},
+		setLogin: function (login) {
+			$localStorage.login = login;
+		},
+		getLogin: function () {
+			return $localStorage.login;
+		},
 		setPerfil: function (perfil) {
 			$localStorage.perfil = perfil;
 		},
 		getPerfil: function () {
-			return $localStorage.perfil
+			return $localStorage.perfil;
 		},
 		setAdministrador: function (administrador) {
 			$localStorage.administrador = administrador;
@@ -37,7 +43,7 @@ app.factory('autenticacao', ['$q', '$localStorage', function ($q, $localStorage)
 	}
 }]);
 
-app.factory('interceptorAutenticacao', ['$q', '$location', 'autenticacao', function ($q, $location, autenticacao) {
+app.factory('interceptorAutenticacao', ['$q', '$state', 'autenticacao', function ($q, $state, autenticacao) {
 	return {
 		request: function (config) {
 			config.headers = config.headers || {};
@@ -50,7 +56,7 @@ app.factory('interceptorAutenticacao', ['$q', '$location', 'autenticacao', funct
 		},
 		responseError: function (error) {
 			if (error.status === 401 || error.status === 403) {
-				$location.path('/login');
+				$state.go('login');
 			}
 			return $q.reject(error);
 		}
@@ -87,11 +93,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			name: 'home.operadores.salvar',
 			url: '/',
 			component: 'operador',
+			administrador: true,
 			resolve: {
-				operador: function (operadores, $stateParams) {
-					return operadores.find(function (operador) {
-						return operador.id == $stateParams.id;
-					});
+				operador: function () {
+					return {}
 				}
 			}
 		},
@@ -99,12 +104,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			name: 'home.operadores.editar',
 			url: '/{id}',
 			component: 'operador',
+			administrador: true,
 			resolve: {
-				// TODO: buscar no servidor
-				operador: function (operadores, $stateParams) {
-					return angular.copy(operadores.find(function (operador) {
-						return operador.id == $stateParams.id;
-					}));
+				operador: function ($stateParams, OperadoresService) {
+					return OperadoresService.buscarPorId($stateParams.id);
 				}
 			}
 		},
@@ -112,18 +115,46 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			name: 'home.pessoas',
 			url: 'pessoas',
 			component: 'pessoas',
+			perfis: ['ANALISTA', 'GERENTE'],
+			resolve: {
+				pessoas: function (PessoasService) {
+					return PessoasService.buscarTodos();
+				}
+			}
+		},
+		{
+			name: 'home.pessoas.salvar',
+			url: '/',
+			component: 'pessoa',
+			perfis: ['GERENTE'],
+			resolve: {
+				pessoa: function () {
+					return {};
+				}
+			}
+		},
+		{
+			name: 'home.pessoas.editar',
+			url: '/{id}',
+			component: 'pessoa',
+			perfis: ['GERENTE'],
+			resolve: {
+				pessoa: function ($stateParams, PessoasService) {
+					return PessoasService.buscarPorId($stateParams.id);
+				}
+			}
 		},
 		{
 			name: 'home.acessonegado',
 			url: 'restrito',
-			component: 'acessonegado'			
+			component: 'acessonegado'
 		},
 		{
 			name: 'login',
 			url: '/login',
 			component: 'login'
 		}
-		
+
 	];
 
 	states.forEach((state) => $stateProvider.state(state));
@@ -143,18 +174,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-app.run(['$state', '$rootScope', 'autenticacao', '$q' ,'$timeout', function ($state, $rootScope, autenticacao, $q, $timeout) {
+app.run(['$state', '$rootScope', 'autenticacao', '$q', '$timeout', function ($state, $rootScope, autenticacao, $q, $timeout) {
 	$rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
 
 		if (toState.administrador) {
-			
+
 			if (!autenticacao.isAdministrador()) {
 				$timeout(function () {
 					$state.go('home.acessonegado')
 				});
 
 				return $q.reject()
-			} 
+			}
 		}
 
 	});
