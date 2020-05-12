@@ -1,6 +1,7 @@
 	package br.com.bottinocode.cdpmirante.operadores;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,6 +66,6 @@ public class Operador {
 	private Boolean administrador = false;
 		
 	@Column(name = "DATA_CADASTRO", columnDefinition = "DATE")	
-	private LocalDate dataCadastro = LocalDate.now();	
+	private Date dataCadastro = new Date();	
 
 }

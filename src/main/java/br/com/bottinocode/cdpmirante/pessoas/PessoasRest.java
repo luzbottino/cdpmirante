@@ -1,4 +1,4 @@
-package br.com.bottinocode.cdpmirante.operadores;
+package br.com.bottinocode.cdpmirante.pessoas;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,26 +25,26 @@ import javax.ws.rs.core.Response;
 import br.com.bottinocode.cdpmirante.autenticacao.Login;
 import br.com.bottinocode.cdpmirante.util.Validador;
 
-@Path("/operadores")
+@Path("/pessoas")
 @RequestScoped
-public class OperadoresRest {
+public class PessoasRest {
 
 	@Inject
     private Logger log;
-	
-	@Inject
-	private Validador<Operador> validador;
 
     @Inject
-	private OperadoresRepository repositorio;
+	private PessoasRepository repositorio;
     
     @Inject
-    private OperadoresService servico;
+    private PessoasService servico;
+
+    @Inject
+	private Validador<Pessoa> validador;
     
     @Login
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Operador> listar() {
+    public List<Pessoa> listar() {
         return repositorio.buscarTodos();
     }
     
@@ -52,12 +52,12 @@ public class OperadoresRest {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Operador recuperar(@PathParam("id") long id) {
-        Operador operador = repositorio.buscarPorId(id);
-        if (operador == null) {
+    public Pessoa recuperar(@PathParam("id") long id) {
+        Pessoa pessoa = repositorio.buscarPorId(id);
+        if (pessoa == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return operador;
+        return pessoa;
     }
     
     @Login
@@ -80,20 +80,18 @@ public class OperadoresRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Response salvar(Operador operador) {
+    public Response salvar(Pessoa pessoa) {
 
         Response.ResponseBuilder builder = null;
 
         try {
-        	
-        	Map<String, String> violacoes = validador.validarObjeto(operador);
+        	Map<String, String> violacoes = validador.validarObjeto(pessoa);
         	
         	if(violacoes.isEmpty()) {
         		builder = Response.ok();
         	} else {
         		builder = Response.status(Response.Status.BAD_REQUEST).entity(violacoes);	
-        	}        	
-            
+        	}       
         } catch (Exception e) {          
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("error", e.getMessage());
@@ -101,7 +99,8 @@ public class OperadoresRest {
         }
 
         return builder.build();
-    }
+    }   
     
-   
 }
+
+
