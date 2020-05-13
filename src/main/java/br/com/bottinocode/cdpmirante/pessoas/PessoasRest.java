@@ -87,32 +87,35 @@ public class PessoasRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Response salvar(PessoaDao pessoa) {
+    public Response salvar(PessoaDao pessoaDao) {
 
         Response.ResponseBuilder builder = null;
 
-        Pessoa nova = Pessoa.com().id(pessoa.getId()).nome(pessoa.getNome()).documento(pessoa.getDocumento())
-                .dataNascimento(pessoa.getDataNascimento()).nomeMae(pessoa.getNomeMae()).nomePai(pessoa.getNomePai())
-                .dataCadastro(pessoa.getDataCadastro()).login(pessoa.getLogin()).tipo(pessoa.getTipo()).construir();
+        Pessoa pessoa = Pessoa.com().id(pessoaDao.getId()).nome(pessoaDao.getNome()).documento(pessoaDao.getDocumento())
+                .dataNascimento(pessoaDao.getDataNascimento()).nomeMae(pessoaDao.getNomeMae()).nomePai(pessoaDao.getNomePai())
+                .dataCadastro(pessoaDao.getDataCadastro()).login(pessoaDao.getLogin()).tipo(pessoaDao.getTipo()).construir();
 
         try {
             List<Map<String, String>> violacoesTelefone = new ArrayList<>();
-            pessoa.getTelefones().forEach(telefone -> {
+            pessoaDao.getTelefones().forEach(telefone -> {
                 Map<String, String> violacoes = validadorTelefone.validarObjeto(telefone);
                 if (!violacoes.isEmpty()) {
                     violacoesTelefone.add(violacoes);
                 }
                 if (telefone.getPessoa() == null) {
-                    telefone.setPessoa(pessoa);
+                    telefone.setPessoa(pessoaDao);
                 }
             });
 
-            Map<String, String> violacoes = validadorPessoa.validarObjeto(nova);
-
+            Map<String, String> violacoes = validadorPessoa.validarObjeto(pessoa);
+            final Pessoa pessoaAtualizada = servicoPessoas.salvar(pessoa);
             if (violacoes.isEmpty() && violacoesTelefone.isEmpty()) {
-                pessoa.getTelefones().forEach(telefone -> {
-                    servicoTelefones.salvar(telefone, servicoPessoas.salvar(nova));
-                });
+
+                if(pessoaDao.getTelefones() != null && !pessoaDao.getTelefones().isEmpty()) {
+                    pessoaDao.getTelefones().forEach(telefone -> {
+                        servicoTelefones.salvar(telefone, pessoaAtualizada);
+                    });
+                }
                 builder = Response.ok();
             } else {
                 builder = Response.status(Response.Status.BAD_REQUEST).entity(violacoes);
