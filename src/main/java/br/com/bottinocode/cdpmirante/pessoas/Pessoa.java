@@ -14,19 +14,22 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "PESSOA")
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder(builderMethodName = "com", buildMethodName = "construir")
 public class Pessoa {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter
 	@Column(name = "ID")
     private Long id;
@@ -80,6 +83,18 @@ public class Pessoa {
 	@Setter
 	@Column(name = "TIPO")	
 	private Tipo tipo;
+
+	public Pessoa(Pessoa pessoa) {
+		this.id = pessoa.id;
+		this.nome = pessoa.nome;
+		this.documento = pessoa.documento;
+		this.dataNascimento = pessoa.dataNascimento;
+		this.nomeMae = pessoa.nomeMae;
+		this.nomePai = pessoa.nomePai;
+		this.dataCadastro = pessoa.dataCadastro;
+		this.login = pessoa.login;
+		this.tipo = pessoa.tipo;
+	}
 	
 	public enum Tipo {
 		FISICA, JURIDICA

@@ -3,13 +3,11 @@ package br.com.bottinocode.cdpmirante.operadores;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,9 +27,6 @@ import br.com.bottinocode.cdpmirante.util.Validador;
 @RequestScoped
 public class OperadoresRest {
 
-	@Inject
-    private Logger log;
-	
 	@Inject
 	private Validador<Operador> validador;
 

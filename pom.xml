@@ -144,6 +144,12 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+    </dependency>
 
 		<!-- SECURITY -->
 		<dependency>
@@ -176,9 +182,9 @@
 
 	<profiles>
 		<profile>
-			<!-- The default profile skips all tests, though you can tune it to run 
+			<!-- The default profile skips all tests, though you can tune it to run
 				just unit tests based on a custom pattern -->
-			<!-- Seperate profiles are provided for running all tests, including Arquillian 
+			<!-- Seperate profiles are provided for running all tests, including Arquillian
 				tests that execute in the specified container -->
 			<id>default</id>
 			<activation>
@@ -199,9 +205,9 @@
 
 		<profile>
 
-			<!-- An optional Arquillian testing profile that executes tests in your 
+			<!-- An optional Arquillian testing profile that executes tests in your
 				WildFly instance -->
-			<!-- This profile will start a new WildFly instance, and execute the test, 
+			<!-- This profile will start a new WildFly instance, and execute the test,
 				shutting it down when done -->
 			<!-- Run with: mvn clean test -Parq-wildfly-managed -->
 			<id>arq-wildfly-managed</id>
@@ -215,7 +221,7 @@
 		</profile>
 
 		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in a remote 
+			<!-- An optional Arquillian testing profile that executes tests in a remote
 				WildFly instance -->
 			<!-- Run with: mvn clean test -Parq-wildfly-remote -->
 			<id>arq-wildfly-remote</id>
@@ -229,11 +235,11 @@
 		</profile>
 
 		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
+			<!-- When built in OpenShift the 'openshift' profile will be used when
 				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
+			<!-- Use this profile for any OpenShift specific customization your app
 				will need. -->
-			<!-- By default that is to put the resulting archive into the 'deployments' 
+			<!-- By default that is to put the resulting archive into the 'deployments'
 				folder. -->
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>

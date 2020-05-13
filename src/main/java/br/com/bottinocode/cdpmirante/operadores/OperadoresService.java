@@ -18,12 +18,15 @@ public class OperadoresService {
     private Event<Operador> event;
  
     @Inject
-    private EntityManager em;
+	private EntityManager em;
+	
+	@Inject
+	private OperadoresRepository repositorio;
     
     public void salvar(Operador operador) {
 		log.info("Salvando " + operador.getNome());
 		
-		if(operador.getId() == null || em.find(Operador.class, operador.getId()) == null) {
+		if(operador.getId() == null || repositorio.buscarPorId(operador.getId()) == null) {
 			em.persist(operador);
 		} else {
 			em.merge(operador);	
@@ -34,7 +37,7 @@ public class OperadoresService {
 	}
 
 	public void excluir(Long id) {
-		Operador operador = em.find(Operador.class, id);
+		Operador operador = repositorio.buscarPorId(id);
 		
 		if(operador == null) {
 			throw new NotFoundException();
