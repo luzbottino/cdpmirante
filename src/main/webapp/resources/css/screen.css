@@ -68,8 +68,22 @@ body {
   border-bottom: #808080 5px;
 }
 
+.mg-left-20 {
+  margin-left: 20px;
+}
+
+.mg-left-10 {
+  margin-left: 10px;
+}
+
 .btn-sair {
   margin-left: 20px;
+}
+
+hr.linha {
+  border-top: 2px dotted #000;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .nav-pills>li>a.active,

@@ -1,24 +1,17 @@
 	package br.com.bottinocode.cdpmirante.operadores;
 
-import java.time.LocalDate;
-import java.util.Date;
+	import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+	import javax.persistence.Column;
+	import javax.persistence.Entity;
+	import javax.persistence.Enumerated;
+	import javax.persistence.GeneratedValue;
+	import javax.persistence.GenerationType;
+	import javax.persistence.Id;
+	import javax.persistence.Table;
+	import javax.validation.constraints.NotNull;
+	import javax.validation.constraints.Pattern;
+	import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;

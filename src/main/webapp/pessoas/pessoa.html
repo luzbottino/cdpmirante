@@ -1,6 +1,7 @@
-<div class="row">
+<div class="row mg-left-20">
 	<h3>{{ctrl.titulo}}</h3>
 </div>
+<hr class="linha">
 <div class="row">
 	<form class="form-horizontal">
 		<div class="form-group">
@@ -71,7 +72,7 @@
 				<div class="panel-heading">
 					Telefones
 					<div class="pull-right">
-						<a ng-click="ctrl.adicionarTelefone()">Adicionar</a>
+						<button ng-click="ctrl.adicionarTelefone()" class="btn btn-default" ng-class="{'link-desabilitado': ctrl.perfil != 'GERENTE'}" ng-disabled="ctrl.perfil != 'GERENTE'">Adicionar</button>
 					</div>
 				</div>
 	
@@ -81,14 +82,14 @@
 							<label class="control-label col-sm-2" for="ddd">DDD:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="ddd"
-									ng-model="telefone.ddd">
+									ng-model="telefone.ddd" ng-disabled="ctrl.perfil == 'ANALISTA'">
 							</div>
 						</div>		
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="numero">Número:</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="numero"
-									ng-model="telefone.numero">
+									ng-model="telefone.numero" ng-disabled="ctrl.perfil == 'ANALISTA'">
 							</div>
 						</div>		
 						<div class="form-group">
@@ -108,7 +109,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="tipo">Tipo:</label>
 							<div class="col-sm-10">
-								<select ng-model="telefone.tipo">
+								<select ng-model="telefone.tipo" ng-disabled="ctrl.perfil == 'ANALISTA'">
 									<option value="CELULAR">Celular
 									<option value="FIXO">Fixo 
 									<option value="COMERCIAL">Comercial
@@ -118,22 +119,20 @@
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">								
-								<button class="btn btn-error" ng-click="ctrl.excluirTelefone(telefone)">Excluir</button>								
+								<button class="btn btn-error" ng-click="ctrl.excluirTelefone(telefone)" ng-class="{'link-desabilitado': ctrl.perfil != 'GERENTE'}" ng-disabled="ctrl.perfil != 'GERENTE'">Excluir</button>								
 							</div>
 						</div>
 					</li>
 				</ul>		
 			</div>	
 		</div>
-
+		<hr class="linha">
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
+			<div class="pull-left mg-left-10">
 				<button type="submit" ng-click="ctrl.salvar()" class="btn btn-info" ng-if="ctrl.perfil == 'GERENTE'">Salvar</button>
 				<button class="btn btn-default" ui-sref="home.pessoas" ng-if="ctrl.perfil == 'GERENTE'">Cancelar</button>
 				<button class="btn btn-default" ui-sref="home.pessoas" ng-if="ctrl.perfil == 'ANALISTA'">Voltar</button>
 			</div>
 		</div>
 	</form>
-
-	{{pessoa | json}}
 </div>
