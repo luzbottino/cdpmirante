@@ -125,8 +125,7 @@
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
-		</dependency>
-
+		</dependency>		
 		<!-- UTIL -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

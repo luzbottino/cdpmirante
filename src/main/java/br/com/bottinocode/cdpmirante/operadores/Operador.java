@@ -29,6 +29,7 @@ public class Operador {
 	@NotNull
     @Size(max = 100)
     @Pattern(regexp = "[^0-9]*", message = "Não deve conter números")
+	@Setter
 	@Getter
 	@Column(name = "NOME")
     private String nome;	
@@ -36,6 +37,7 @@ public class Operador {
 	@NotNull
 	@Size(max = 15)
 	@Pattern(regexp = "[^0-9]*", message = "Apenas letras e os caracteres (-) e (_) são permitidos")
+	@Setter
 	@Getter
 	@Column(name = "LOGIN")
 	private String login;
@@ -43,22 +45,26 @@ public class Operador {
 	@NotNull
 	@Size(min = 6, max = 15)
 	@Pattern(regexp = "[^\\s]*", message = "Espaços em branco não são permitidos")
-	@Getter
 	@Setter
+	@Getter
 	@Column(name = "SENHA")
 	private String senha;
 	
 	@Enumerated
-	@Getter
 	@Setter
+	@Getter
 	@Column(name = "PERFIL")	
 	private Perfil perfil;
-
+	
 	@Getter
 	@Column(name = "ADMINISTRADOR")
 	private Boolean administrador = false;
 		
 	@Column(name = "DATA_CADASTRO", columnDefinition = "DATE")	
 	private Date dataCadastro = new Date();	
+	
+	public enum Perfil {
+		ANALISTA, GERENTE;
+	}
 
 }
