@@ -22,9 +22,9 @@ public class TelefonesService {
     private EntityManager em;
 
     
-    public void salvar(Telefone telefone, Pessoa pessoa) {
+    public void salvar(Telefone telefone, Pessoa pessoa) {        
+        telefone.setPessoa(repositorioPessoa.buscarPorId(pessoa.getId()));
         if (telefone.getId() == null || repositorioTelefone.buscarPorId(telefone.getId()) == null) {            
-            telefone.setPessoa(repositorioPessoa.buscarPorId(pessoa.getId()));
             em.persist(telefone);
         } else {
             em.merge(telefone);

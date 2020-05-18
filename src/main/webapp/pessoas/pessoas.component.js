@@ -3,6 +3,11 @@ function PessoasController($scope,autenticacao, PessoasService) {
 	ctrl.titulo = 'Lista de Pessoas';
 	ctrl.perfil = autenticacao.getPerfil();
 
+	ctrl.pessoas.forEach(pessoa => {
+		pessoa.dataNascimento = new Date(pessoa.dataNascimento).toLocaleDateString();
+		pessoa.dataCadastro = new Date(pessoa.dataCadastro).toLocaleDateString();
+	});
+
 	ctrl.excluir = function (operador) {
 		PessoasService.excluir(operador.id).then(resp => {
 			PessoasService.buscarTodos().then(resp => {

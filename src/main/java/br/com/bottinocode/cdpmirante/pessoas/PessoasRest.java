@@ -108,8 +108,9 @@ public class PessoasRest {
             });
 
             Map<String, String> violacoes = validadorPessoa.validarObjeto(pessoa);
-            final Pessoa pessoaAtualizada = servicoPessoas.salvar(pessoa);
             if (violacoes.isEmpty() && violacoesTelefone.isEmpty()) {
+                
+                final Pessoa pessoaAtualizada = servicoPessoas.salvar(pessoa);
 
                 if(pessoaDao.getTelefones() != null && !pessoaDao.getTelefones().isEmpty()) {
                     pessoaDao.getTelefones().forEach(telefone -> {

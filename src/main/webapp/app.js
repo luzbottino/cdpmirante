@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngResource', 'ngGrid', 'ui.bootstrap', 'ui.router', 'ui.router.state.events', 'ngStorage', 'ngMask']);
+var app = angular.module('app', ['ngResource', 'ngGrid', 'ui.bootstrap', 'ui.router', 'ui.router.state.events', 'ngStorage', 'ngMask', 'Alertify']);
 
 app.factory('autenticacao', ['$q', '$localStorage', function ($q, $localStorage) {
 
@@ -43,7 +43,7 @@ app.factory('autenticacao', ['$q', '$localStorage', function ($q, $localStorage)
 	}
 }]);
 
-app.factory('interceptorAutenticacao', ['$q', '$state', 'autenticacao', function ($q, $state, autenticacao) {
+app.factory('interceptorAutenticacao', ['$q', '$state', 'autenticacao', 'Alertify', function ($q, $state, autenticacao, Alertify) {
 	return {
 		request: function (config) {
 			config.headers = config.headers || {};
@@ -57,6 +57,10 @@ app.factory('interceptorAutenticacao', ['$q', '$state', 'autenticacao', function
 		responseError: function (error) {
 			if (error.status === 401 || error.status === 403) {
 				$state.go('login');
+			} else if(error.status === 400) {	
+				for (erro in error.data) {					
+					Alertify.error(`Erro: ${erro} ${error.data[erro]}`);
+				 }				
 			}
 			return $q.reject(error);
 		}
